@@ -17,6 +17,16 @@ path:hover, path.highlighted {
   fill: tomato;
 }
 
+div.tooltip {
+  position: absolute;
+  background-color: white;
+  border: 1px solid black;
+  color: black;
+  font-weight: bold;
+  padding: 4px 8px;
+  display: none;
+}
+
 </style>
 <body>
 <script src="Vendors/d3.v3.min.js"></script>
@@ -24,14 +34,16 @@ path:hover, path.highlighted {
 <script>
 
 //Map dimensions (in pixels)
-var width = 321,
+var width = 900,
     height = 600;
 
 //Map projection
-var projection = d3.geo.mercator()
-    .scale(1680.087883236877)
-    .center([-3.441639359423294,55.748229532775056]) //projection center
-    .translate([width/2,height/2]) //translate to center the map in view
+var projection = d3.geo.conicEqualArea()
+    .scale(2983.1242742678173)
+    .center([-2.786528445906589,54.03967339525449]) //projection center
+    .parallels([49.88572495224115,60.84538104397621]) //parallels for conic projection
+    .rotate([2.786528445906589]) //rotation for conic projection
+    .translate([374.3928878801996,369.53793001846907]) //translate to center the map in view
 
 //Generate paths based on projection
 var path = d3.geo.path()
@@ -54,7 +66,10 @@ var zoom = d3.behavior.zoom()
 
 svg.call(zoom);
 
-d3.json("Map-Data/map (1).topojson",function(error,geodata) {
+//Create a tooltip, hidden at the start
+var tooltip = d3.select("body").append("div").attr("class","tooltip");
+
+d3.json("Map-Data/map (1).topojson,function(error,geodata) {
   if (error) return console.log(error); //unknown error, check the console
 
   //Create a path for each map feature in the data
@@ -63,6 +78,9 @@ d3.json("Map-Data/map (1).topojson",function(error,geodata) {
     .enter()
     .append("path")
     .attr("d",path)
+    .on("mouseover",showTooltip)
+    .on("mousemove",moveTooltip)
+    .on("mouseout",hideTooltip)
     .on("click",clicked);
 
 });
@@ -80,4 +98,26 @@ function zoomed() {
       .selectAll("path").style("stroke-width", 1 / zoom.scale() + "px" );
 }
 
+
+//Position of the tooltip relative to the cursor
+var tooltipOffset = {x: 5, y: -25};
+
+//Create a tooltip, hidden at the start
+function showTooltip(d) {
+  moveTooltip();
+
+  tooltip.style("display","block")
+      .text(d.properties.Name);
+}
+
+//Move the tooltip to track the mouse
+function moveTooltip() {
+  tooltip.style("top",(d3.event.pageY+tooltipOffset.y)+"px")
+      .style("left",(d3.event.pageX+tooltipOffset.x)+"px");
+}
+
+//Create a tooltip, hidden at the start
+function hideTooltip() {
+  tooltip.style("display","none");
+}
 </script>
