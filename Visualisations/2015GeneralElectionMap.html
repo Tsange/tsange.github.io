@@ -17,7 +17,7 @@ path {
 path2 {
   stroke-width: 1px;
   stroke: white;
-  fill: pink;
+  fill: blue;
   cursor: pointer;
 }
 
@@ -102,8 +102,17 @@ d3.json("Map-Data/map (1).topojson",function(error,geodata) {
   features.selectAll("path")
     .data(topojson.feature(geodata,geodata.objects.collection).features) //generate features from TopoJSON
     .enter()
-    .append("path")
+    
+    if(d.properties.ElectionData_Winner15=="Labour"){
+    	append("path2")
+    .attr("d",path2)
+    }else{
+    	append("path")
     .attr("d",path)
+    	
+    }
+    
+    .
     .on("mouseover",showTooltip)
     .on("mousemove",moveTooltip)
     .on("mouseout",hideTooltip)
