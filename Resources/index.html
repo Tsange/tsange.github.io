@@ -1,34 +1,55 @@
-<!DOCTYPE html>
 <html>
-	<head>
-		<title>[Tsange] - Resources</title>
-				<!-- link to main stylesheet -->
-		<link rel="stylesheet" type="text/css" href="/css/main.css">
-	</head>
-	<body>
-		<nav>
-    		<ul>
-        		<li><a href="/">Home</a></li>
-        		<li><a href="/Visualisations">Visualisations</a></li>
-        		<li><a href="/Resources">Resources</a></li>
-    		</ul>
-		</nav>
-		<div class="container">
-    		<div class="blurb">
-        		<h1>Resources</h1>
-        		<h2>Cool Online Tools</h2>
-				<p>
-				• <a href="http://mapstarter.com/">Map Starter - Generates Maps for the web from GeoJSON, TopoJSON or ESRI Shapefiles</a>
-			
-					
-					
-				</p>
-    		</div><!-- /.blurb -->
-		</div><!-- /.container -->
-		<footer>
-    		<ul>
-        		<li><a href="https://github.com/tsange">github.com/[Tsange]</a></li>
-			</ul>
-		</footer>
-	</body>
+<head>
+<script src="jquery-1.11.2.min.js"></script>
+</head>
+<body>
+<div id="header"></div>
+<br/>
+<h1>Resources</h1>
+<h2>Maps</h2>
+<ul>
+<li><a href="https://geojson-maps.kyd.com.au/">GeoJSON Regions</a>&nbsp;- Downloadable continental maps at different resolutions</li>
+<li><a href="http://code.highcharts.com/mapdata/">High Charts</a>&nbsp;- Collection of maps from individual countries or regions</li>
+</ul>
+<h3>UK Specific</h3>
+<ul>
+<li><a href="http://martinjc.github.io/UK-GeoJSON/">UK-GeoJSON</a> - TopoJSON Maps for Parliamentary Constituencies, Local Wards, National Assemblies and European Electoral Regions</li>
+<li><a href="https://www.ordnancesurvey.co.uk/business-and-government/products/boundary-line.html"> Ordnance Survey</a> - Generates Maps for the web from GeoJSON, TopoJSON or ESRI Shapefiles</li>
+<li><a href="https://data.gov.uk/dataset/boundary-line">DATA.GOV.UK</a>&nbsp;- All UK boundary divisions</li>
+<li><a href="http://sketchmap.co.uk/">SketchMap</a>&nbsp;- Generate UK maps using a series of overlays that can be shared or downloaded as a PDF</li>
+<li><a href="/Maps/OldUKMaps">OldUKMaps</a> - My collection of historic maps &nbsp;&nbsp;</li>
+
+/Maps/OldUKMaps
+</ul>
+<h3>Tools</h3>
+<ul>
+<li><a href="http://geojsonlint.com/">GeoJSONLint </a>- GeoJSON&nbsp;validator</li>
+<li><a href="http://jeffpaine.github.io/geojson-topojson/">GeoJSON-TopoJSON</a>&nbsp;- Convert GeoJSON to TopoJSON and vice versa</li>
+<li><a href="https://shancarter.github.io/distillery/">The Distillery</a>&nbsp;- Change a&nbsp;GeoJSON map's projection and simplify geometry</li>
+<li><a href="http://www.mapshaper.org/">MapShaper</a>&nbsp;- Simplify and repair line intersections</li>
+<li><a href="http://mapstarter.com/">Map Starter</a> - Generates Maps for the web from GeoJSON, TopoJSON or ESRI Shapefiles</li>
+</ul>
+<h2>Information Sources</h2>
+<ul>
+<li><a href="http://databank.worldbank.org/data/home.aspx">World DataBank</a>&nbsp;- General</li>
+<li><a href="https://en.wikipedia.org/wiki/List_of_national_and_international_statistical_services">Wikipedia </a>- List of national statistic gathering organisations by country</li>
+<li><a href="http://www.who.int/gho/en/">World Health Organization</a></li>
+<li></li>
+</ul>
+<h3>UK Specific</h3>
+<ul>
+<li><a href="https://data.gov.uk/data/search">DATA.GOV.UK</a>&nbsp;- Datasets on a wide&nbsp;variety of topics (Transport, Health, Economy etc.)</li>
+<li><a href="http://www.hscic.gov.uk/statisticsa-z">HSCIC</a>&nbsp;- Data relating to health and social care&nbsp;</li>
+<li><a href="https://www.ons.gov.uk/">ONS (Office of National Statistics)</a>&nbsp;- Huge collection of data on the&nbsp;UK's economy, society and population.</li>
+<li><a href="http://www.data-archive.ac.uk/">UK Data Archive</a>&nbsp;- Collection of&nbsp;research data in the social sciences and humanities</li>
+<li><a href="https://www.ukdataservice.ac.uk/">UK Data Service</a>&nbsp;- Social, economic and population</li>
+<li><a href="https://www.whatdotheyknow.com/list/successful">WhatDoTheyKnow</a>&nbsp;- Data obtained via Freedom of Information requests</li>
+</ul>
+<br/>
+<div id="footer"></div>
+<script>
+$("#header").load("header.html");
+$("#footer").load("footer.html");
+</script>
+</body>
 </html>
