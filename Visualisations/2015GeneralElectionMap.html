@@ -1,10 +1,10 @@
-<!DOCTYPE html>
 <html>
-	<head>
-		<title>[Tsange] - Visualisations</title>
-				<!-- link to main stylesheet -->
-		<link rel="stylesheet" type="text/css" href="/css/main.css">
-	</head>
+<head>
+<script src="jquery-1.11.2.min.js"></script>
+</head>
+<body>
+<div id="header"></div>
+<br/>
 <style>
 path {
   stroke-width: 1px;
@@ -34,17 +34,7 @@ div.tooltip {
   display: none;
 }
 </style>
-<body>
-  
-  	<nav>
-    		<ul>
-        		<li><a href="/">Home</a></li>
-	        	<li><a href="/about">About</a></li>
-        		<li><a href="/Visualisations">Visualisations</a></li>
-        		<li><a href="/blog">Blog</a></li>
-    		</ul>
-		</nav>
-		<div class="container">
+<div class="container">
     		<div class="blurb">
         		<h1>2015 General Election Conservative Vote Percentages</h1>
 				<p>Created with D3 + topoJSON  </p>
@@ -120,10 +110,11 @@ function moveTooltip() {
 function hideTooltip() {
   tooltip.style("display","none");
 }
+</script><br/>
+<div id="footer"></div>
+<script>
+$("#header").load("header.html");
+$("#footer").load("footer.html");
 </script>
-		<footer>
-    		<ul>
-        		<li><a href="https://github.com/tsange">github.com/[Tsange]</a></li>
-			</ul>
-		</footer>
+</body>
 </html>
