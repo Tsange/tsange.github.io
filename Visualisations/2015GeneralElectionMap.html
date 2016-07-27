@@ -11,14 +11,20 @@
 path {
   stroke-width: 1px;
   stroke: white;
-  fill: pink;
+  fill: #999;
   cursor: pointer;
 }
-path2 {
-  stroke-width: 1px;
-  stroke: white;
-  fill: blue;
-  cursor: pointer;
+
+path.q0-3 {
+  fill: #e0f3db;
+}
+
+path.q1-3 {
+  fill: #a8ddb5;
+}
+
+path.q2-3 {
+  fill: #43a2ca;
 }
 
 path:hover, path.highlighted {
@@ -98,26 +104,15 @@ var tooltip = d3.select("body").append("div").attr("class","tooltip");
 d3.json("Map-Data/map (1).topojson",function(error,geodata) {
   if (error) return console.log(error); //unknown error, check the console
 
+
   //Create a path for each map feature in the data
   features.selectAll("path")
-    .data(topojson.feature(geodata,geodata.objects.collection).features) //generate features from TopoJSON
+    .data(geodata.features)
     .enter()
-    
-    if(d.properties.ElectionData_Winner15=="Labour"){
-    	append("path2")
-    .attr("d",path2)
-    }else{
-    	append("path")
+    .append("path")
     .attr("d",path)
-    	
-    }
-    
-    .on("mouseover",showTooltip)
-    .on("mousemove",moveTooltip)
-    .on("mouseout",hideTooltip)
+    .attr("class", function(d) { return (typeof color(d.properties.ElectionData_Winner15) == "Labour" ? color(d.properties.ElectionData_Winner15) : ""); })
     .on("click",clicked);
-
-});
 
 // Add optional onClick events for features here
 // d.properties contains the attributes (e.g. d.properties.name, d.properties.population)
