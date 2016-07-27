@@ -54,8 +54,8 @@ div.tooltip {
 				<p>Created with D3 + topoJSON  </p>
     		</div><!-- /.blurb -->
 		</div><!-- /.container -->
-<script src="d3.v3.min.js"></script>
-<script src="topojson.v1.min.js"></script>
+<script src="Vendors/d3.v3.min.js"></script>
+<script src="Vendors/topojson.v1.min.js"></script>
 
 
 
@@ -100,7 +100,7 @@ svg.call(zoom);
 //Create a tooltip, hidden at the start
 var tooltip = d3.select("body").append("div").attr("class","tooltip");
 
-d3.json("UK.JSON",function(error,geodata) {
+d3.json("Map-Data/UK.JSON",function(error,geodata) {
   if (error) return console.log(error); //unknown error, check the console
 
   //Create a path for each map feature in the data
