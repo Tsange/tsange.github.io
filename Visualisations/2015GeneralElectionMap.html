@@ -54,7 +54,7 @@ var zoom = d3.behavior.zoom()
 
 svg.call(zoom);
 
-d3.json("map (1).topojson",function(error,geodata) {
+d3.json("Map-Data/map (1).topojson",function(error,geodata) {
   if (error) return console.log(error); //unknown error, check the console
 
   //Create a path for each map feature in the data
