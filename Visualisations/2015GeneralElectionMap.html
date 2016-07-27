@@ -127,7 +127,8 @@ function showTooltip(d) {
   moveTooltip();
 
   tooltip.style("display","block")
-      .text(d.properties.Name);
+      .text(d.properties.Name)
+      .text(d.properties.ElectionData_Winner15);
 }
 
 //Move the tooltip to track the mouse
