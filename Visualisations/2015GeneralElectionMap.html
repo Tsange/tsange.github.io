@@ -47,9 +47,8 @@ div.tooltip {
   	<nav>
     		<ul>
         		<li><a href="/">Home</a></li>
-	        	<li><a href="/about">About</a></li>
         		<li><a href="/Visualisations">Visualisations</a></li>
-        		<li><a href="/blog">Blog</a></li>
+        		<li><a href="/Resources">Resources</a></li>
     		</ul>
 		</nav>
 		<div class="container">
@@ -111,7 +110,7 @@ d3.json("Map-Data/map (1).topojson",function(error,geodata) {
     .enter()
     .append("path")
     .attr("d",path)
-    .attr("class", function(d) { return (typeof color(d.properties.ElectionData_Winner15) == "Labour" ? color(d.properties.ElectionData_Winner15) : ""); })
+    .attr("class", function(d) { return (typeof color(d.properties.name) == "string" ? color(d.properties.name) : ""); })
     .on("click",clicked);
 
 // Add optional onClick events for features here
