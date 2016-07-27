@@ -6,31 +6,24 @@
 		<link rel="stylesheet" type="text/css" href="/css/main.css">
 	</head>
 <style>
-
-
 path {
   stroke-width: 1px;
   stroke: white;
   fill: #999;
   cursor: pointer;
 }
-
 path.q0-3 {
   fill: #e0f3db;
 }
-
 path.q1-3 {
   fill: #a8ddb5;
 }
-
 path.q2-3 {
   fill: #43a2ca;
 }
-
 path:hover, path.highlighted {
   fill: tomato;
 }
-
 div.tooltip {
   position: absolute;
   background-color: white;
@@ -40,15 +33,15 @@ div.tooltip {
   padding: 4px 8px;
   display: none;
 }
-
 </style>
 <body>
   
   	<nav>
     		<ul>
         		<li><a href="/">Home</a></li>
+	        	<li><a href="/about">About</a></li>
         		<li><a href="/Visualisations">Visualisations</a></li>
-        		<li><a href="/Resources">Resources</a></li>
+        		<li><a href="/blog">Blog</a></li>
     		</ul>
 		</nav>
 		<div class="container">
@@ -63,11 +56,9 @@ div.tooltip {
 
 
 <script>
-
 //Map dimensions (in pixels)
 var width = 900,
     height = 600;
-
 //Map projection
 var projection = d3.geo.conicEqualArea()
     .scale(2983.1242742678173)
@@ -75,85 +66,64 @@ var projection = d3.geo.conicEqualArea()
     .parallels([49.88572495224115,60.84538104397621]) //parallels for conic projection
     .rotate([2.786528445906589]) //rotation for conic projection
     .translate([374.3928878801996,369.53793001846907]) //translate to center the map in view
-
 //Generate paths based on projection
 var path = d3.geo.path()
     .projection(projection);
-
 //Create an SVG
 var svg = d3.select("body").append("svg")
     .attr("width", width)
     .attr("height", height);
-
 //Group for the map features
 var features = svg.append("g")
     .attr("class","features");
-
 //Create zoom/pan listener
 //Change [1,Infinity] to adjust the min/max zoom scale
 var zoom = d3.behavior.zoom()
     .scaleExtent([1, Infinity])
     .on("zoom",zoomed);
-
 svg.call(zoom);
-
 //Create a tooltip, hidden at the start
 var tooltip = d3.select("body").append("div").attr("class","tooltip");
-
 d3.json("Map-Data/map (1).topojson",function(error,geodata) {
   if (error) return console.log(error); //unknown error, check the console
-
-
   //Create a path for each map feature in the data
   features.selectAll("path")
     .data(geodata.features)
     .enter()
     .append("path")
     .attr("d",path)
-    .attr("class", function(d) { return (typeof color(d.properties.name) == "string" ? color(d.properties.name) : ""); })
+    .attr("class", function(d) { return (typeof color(d.properties.ElectionData_Winner15) == "Labour" ? color(d.properties.ElectionData_Winner15) : ""); })
     .on("click",clicked);
-
 // Add optional onClick events for features here
 // d.properties contains the attributes (e.g. d.properties.name, d.properties.population)
 function clicked(d,i) {
-
 }
-
-
 //Update map on zoom/pan
 function zoomed() {
   features.attr("transform", "translate(" + zoom.translate() + ")scale(" + zoom.scale() + ")")
       .selectAll("path").style("stroke-width", 1 / zoom.scale() + "px" );
 }
-
-
 //Position of the tooltip relative to the cursor
 var tooltipOffset = {x: 5, y: -25};
-
 //Create a tooltip, hidden at the start
 function showTooltip(d) {
   moveTooltip();
-
   tooltip.style("display","block")
       .text(d.properties.ElectionData_Winner15);
 }
-
 //Move the tooltip to track the mouse
 function moveTooltip() {
   tooltip.style("top",(d3.event.pageY+tooltipOffset.y)+"px")
       .style("left",(d3.event.pageX+tooltipOffset.x)+"px");
 }
-
 //Create a tooltip, hidden at the start
 function hideTooltip() {
   tooltip.style("display","none");
 }
 </script>
-
 		<footer>
     		<ul>
         		<li><a href="https://github.com/tsange">github.com/[Tsange]</a></li>
 			</ul>
 		</footer>
-
 </html>
