@@ -1,25 +1,30 @@
 <!DOCTYPE html>
-<meta charset="utf-8">
-<head>
+<html>
+	<head>
 		<title>[Tsange] - Visualisations</title>
 				<!-- link to main stylesheet -->
 		<link rel="stylesheet" type="text/css" href="/css/main.css">
 	</head>
 <style>
 
-body {
-  font: 12px sans-serif;
-}
 
 path {
   stroke-width: 1px;
   stroke: white;
-  fill: steelblue;
+  fill: #999;
   cursor: pointer;
 }
 
-path:hover, path.highlighted {
-  fill: tomato;
+path.q0-3 {
+  fill: #ece7f2;
+}
+
+path.q1-3 {
+  fill: #a6bddb;
+}
+
+path.q2-3 {
+  fill: #2b8cbe;
 }
 
 div.tooltip {
@@ -31,6 +36,8 @@ div.tooltip {
   padding: 4px 8px;
   display: none;
 }
+
+</style>
 <body>
   
   	<nav>
@@ -47,10 +54,11 @@ div.tooltip {
 				<p>Created with D3 + topoJSON  </p>
     		</div><!-- /.blurb -->
 		</div><!-- /.container -->
-</style>
-<body>
 <script src="Vendors/d3.v3.min.js"></script>
 <script src="Vendors/topojson.v1.min.js"></script>
+
+
+
 <script>
 
 //Map dimensions (in pixels)
@@ -141,9 +149,11 @@ function hideTooltip() {
   tooltip.style("display","none");
 }
 </script>
+
 		<footer>
     		<ul>
         		<li><a href="https://github.com/tsange">github.com/[Tsange]</a></li>
 			</ul>
 		</footer>
+
 </html>
