@@ -11,7 +11,13 @@
 path {
   stroke-width: 1px;
   stroke: white;
-  fill: steelblue;
+  fill: pink;
+  cursor: pointer;
+}
+path2 {
+  stroke-width: 1px;
+  stroke: white;
+  fill: pink;
   cursor: pointer;
 }
 
@@ -127,7 +133,6 @@ function showTooltip(d) {
   moveTooltip();
 
   tooltip.style("display","block")
-      .text(d.properties.Name)
       .text(d.properties.ElectionData_Winner15);
 }
 
