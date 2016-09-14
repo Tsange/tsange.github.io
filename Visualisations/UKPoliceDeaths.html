@@ -1,22 +1,23 @@
-<!DOCTYPE html>
-<meta charset="utf-8">
+<html>
+<head>
+<script src="jquery-1.11.2.min.js"></script>
+</head>
+<body>
+<div id="header"></div>
+<br/>
 <style>
-
 circle,
 path {
   cursor: pointer;
 }
-
 circle {
   fill: none;
   pointer-events: all;
 }
-
 #tooltip { background-color: white;
 			  padding: 3px 5px;
 			  border: 1px solid black;
 			  text-align: center;}
-
 html {
 	font-family: sans-serif;
 	
@@ -33,39 +34,30 @@ html {
 	
 <script src="Vendors/d3.v3.min.js"></script>
 <script>
-
 var margin = {top: 200, right: 380, bottom: 200, left: 380},
     radius = Math.min(margin.top, margin.right, margin.bottom, margin.left) - 10;
-
 function filter_min_arc_size_text(d, i) {return (d.dx*d.depth*radius/3)>14}; 
-
 var hue = d3.scale.category10();
-
 var luminance = d3.scale.sqrt()
     .domain([0, 1e6])
     .clamp(true)
     .range([90, 20]);
-
 var svg = d3.select("body").append("svg")
     .attr("width", margin.left + margin.right)
     .attr("height", margin.top + margin.bottom)
   .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
 var totalSize = 0;
-
 var level = 0;
 	
 var partition = d3.layout.partition()
     .sort(function(a, b) { return d3.ascending(a.name, b.name); })
     .size([2 * Math.PI, radius]);
-
 var arc = d3.svg.arc()
     .startAngle(function(d) { return d.x; })
     .endAngle(function(d) { return d.x + d.dx - .01 / (d.depth + .5); })
     .innerRadius(function(d) { return radius / 3 * d.depth; })
     .outerRadius(function(d) { return radius / 3 * (d.depth + 1) - 1; });
-
 //Tooltip description
 var tooltip = d3.select("body")
     .append("div")
@@ -74,13 +66,9 @@ var tooltip = d3.select("body")
     .style("z-index", "10")
     .style("opacity", 0);
 	
-
-
 function format_number(x) {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
-
-
 function format_description(d) {
   var description = d.description;
   
@@ -101,7 +89,6 @@ function format_description(d) {
    if(level==1 && (d.name=="Custody - White"||d.name=="Custody - Asian"||d.name=="Custody - Black"||d.name=="Custody - Mixed"||d.name=="Custody - Other")){
 	totalSize=238;
  }
-
  //Suicides
    if(level==1 && (d.name=="Suicides - White"||d.name=="Suicides - Asian"||d.name=="Suicides - Black"||d.name=="Suicides - Mixed"||d.name=="Suicides - Other"||d.name=="Suicides - Unknown")){
 	totalSize=638;
@@ -111,14 +98,11 @@ function format_description(d) {
    if(level==1 && (d.name=="Other Deaths - White"||d.name=="Other Deaths - Asian"||d.name=="Other Deaths - Black"||d.name=="Other Deaths - Mixed"||d.name=="Other Deaths - Other"||d.name=="Other Deaths - Unknown")){
 	totalSize=506;
  }
-
   
   var percentage = (100 * d.value / totalSize).toPrecision(3);
   
       return  '<b>' + d.name + '<br>' + 'Deaths: '+format_number(d.value) + '<br>'+percentage+'%';
 }
-
-
 function mouseOverArc(d) {
 			 d3.select(this).attr("stroke","black")
 			 
@@ -127,21 +111,17 @@ function mouseOverArc(d) {
             .duration(50)
             .style("opacity", 0.9);
 			
-
         }
-
 function mouseOutArc(){
 	d3.select(this).attr("stroke","")
 	return tooltip.style("opacity", 0);
 }
-
 function mouseMoveArc (d) {
           return tooltip
             .style("top", (d3.event.pageY-10)+"px")
             .style("left", (d3.event.pageX+10)+"px");
 			
 }
-
 var root_ = null;
 d3.json("PoliceDeathData.json", function(error, root) {
   if (error) return console.warn(error);
@@ -160,7 +140,6 @@ d3.json("PoliceDeathData.json", function(error, root) {
 		
 //console.log("ERROR HERE>>>>"+d.fill, new Error().stack);
 		
-
   if(d.name=="Road Traffic Incidents"){
 	d.fill = "#fcb326";
  }
@@ -197,21 +176,17 @@ d3.json("PoliceDeathData.json", function(error, root) {
  }
 		
       });
-
   // Now redefine the value function to use the previously-computed sum.
   partition
       .children(function(d, depth) { return depth < 2 ? d._children : null; })
       .value(function(d) { return d.sum; });
-
   var center = svg.append("circle")
       .attr("r", radius / 3)
       .on("click", zoomOut);
-
   center.append("title")
       .text("zoom out");
       
   var partitioned_data=partition.nodes(root).slice(1)
-
   var path = svg.selectAll("path")
       .data(partitioned_data)
     .enter().append("path")
@@ -222,55 +197,44 @@ d3.json("PoliceDeathData.json", function(error, root) {
 		.on("mouseover", mouseOverArc)
       .on("mousemove", mouseMoveArc)
       .on("mouseout", mouseOutArc);
-
-
   function zoomIn(p) {
     if (p.depth > 1) p = p.parent;
 	level=1;
     if (!p.children) return;
     zoom(p, p);
   }
-
   function zoomOut(p) {
     if (!p.parent) return;
 	level=0;
     zoom(p.parent, p);
   }
-
   // Zoom to the specified new root.
   function zoom(root, p) {
     if (document.documentElement.__transition__) return;
-
     // Rescale outside angles to match the new layout.
     var enterArc,
         exitArc,
         outsideAngle = d3.scale.linear().domain([0, 2 * Math.PI]);
-
     function insideArc(d) {
       return p.key > d.key
           ? {depth: d.depth - 1, x: 0, dx: 0} : p.key < d.key
           ? {depth: d.depth - 1, x: 2 * Math.PI, dx: 0}
           : {depth: 0, x: 0, dx: 2 * Math.PI};
     }
-
     function outsideArc(d) {
       return {depth: d.depth + 1, x: outsideAngle(d.x), dx: outsideAngle(d.x + d.dx) - outsideAngle(d.x)};
     }
-
     center.datum(root);
-
     // When zooming in, arcs enter from the outside and exit to the inside.
     // Entering outside arcs start from the old layout.
     if (root === p) enterArc = outsideArc, exitArc = insideArc, outsideAngle.range([p.x, p.x + p.dx]);
 	
 	 var new_data=partition.nodes(root).slice(1)
-
     path = path.data(new_data, function(d) { return d.key; });
 	 	 
 	 // When zooming out, arcs enter from the inside and exit to the outside.
     // Exiting outside arcs transition to the new layout.
     if (root !== p) enterArc = insideArc, exitArc = outsideArc, outsideAngle.range([p.x, p.x + p.dx]);
-
     d3.transition().duration(d3.event.altKey ? 7500 : 750).each(function() {
       path.exit().transition()
           .style("fill-opacity", function(d) { return d.depth === 1 + (root === p) ? 1 : 0; })
@@ -285,7 +249,6 @@ d3.json("PoliceDeathData.json", function(error, root) {
       	 .on("mousemove", mouseMoveArc)
       	 .on("mouseout", mouseOutArc)
           .each(function(d) { this._current = enterArc(d); });
-
 		
       path.transition()
           .style("fill-opacity", 1)
@@ -295,17 +258,14 @@ d3.json("PoliceDeathData.json", function(error, root) {
          
     });
     
-
 		 
   }
 });
-
 function key(d) {
   var k = [], p = d;
   while (p.depth) k.push(p.name), p = p.parent;
   return k.reverse().join(".");
 }
-
 function fill(d) {
   var p = d;
   while (p.depth > 1) p = p.parent;
@@ -313,7 +273,6 @@ function fill(d) {
   c.l = luminance(d.sum);
   return c;
 }
-
 function arcTween(b) {
   var i = d3.interpolate(this._current, b);
   this._current = i(0);
@@ -321,16 +280,19 @@ function arcTween(b) {
     return arc(i(t));
   };
 }
-
 function updateArc(d) {
   return {depth: d.depth, x: d.x, dx: d.dx};
 }
-
 d3.select(self.frameElement).style("height", margin.top + margin.bottom + "px");
-
 </script> 
 <br>
 
 Source: IPCC (2016) Deaths during or following police contact. Available at: <a href="https://www.ipcc.gov.uk/page/deaths-during-or-following-police-contact">https://www.ipcc.gov.uk/page/deaths-during-or-following-police-contact</a>(Accessed: 2016).
 
+<div id="footer"></div>
+<script>
+$("#header").load("header.html");
+$("#footer").load("footer.html");
+</script>
 </body>
+</html>
