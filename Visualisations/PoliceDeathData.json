@@ -1,0 +1,150 @@
+{
+   "children" : [
+      {
+         "children" : [
+            {
+               "name" : "RTI - White",
+               "size" : 277
+            },
+            {
+               "name" : "RTI - Asian",
+               "size" : 26
+            },
+            {
+               "name" : "RTI - Black",
+               "size" : 27
+            },
+            {
+               "name" : "RTI - Mixed",
+               "size" : 5
+            },
+            {
+               "name" : "RTI - Other",
+               "size" : 3
+            },
+            {
+               "name" : "RTI - Unknown",
+               "size" : 6
+            }
+         ],
+         "name" : "Road Traffic Incidents"
+      },
+      {
+         "children" : [
+            {
+               "name" : "Shootings - White",
+               "size" : 19
+            },
+            {
+               "name" : "Shootings - Asian",
+               "size" : 0
+            },
+            {
+               "name" : "Shootings - Black",
+               "size" : 6
+            },
+            {
+               "name" : "Shootings - Mixed",
+               "size" : 1
+            },
+            {
+               "name" : "Shootings - Other",
+               "size" : 1
+            },
+            {
+               "name" : "Shootings - Unknown",
+               "size" : 0
+            }
+         ],
+         "name" : "Shootings"
+      },
+      {
+         "children" : [
+            {
+               "name" : "Custody - White",
+               "size" : 206
+            },
+            {
+               "name" : "Custody - Asian",
+               "size" : 10
+            },
+            {
+               "name" : "Custody - Black",
+               "size" : 14
+            },
+            {
+               "name" : "Custody - Mixed",
+               "size" : 7
+            },
+            {
+               "name" : "Custody - Other",
+               "size" : 1
+            },
+            {
+               "name" : "Custody - Unknown",
+               "size" : 0
+            }
+         ],
+         "name" : "Deaths in or following custody"
+      },
+      {
+         "children" : [
+            {
+               "name" : "Suicides - White",
+               "size" : 575
+            },
+            {
+               "name" : "Suicides - Asian",
+               "size" : 23
+            },
+            {
+               "name" : "Suicides - Black",
+               "size" : 15
+            },
+            {
+               "name" : "Suicides - Mixed",
+               "size" : 4
+            },
+            {
+               "name" : "Suicides - Other",
+               "size" : 1
+            },
+            {
+               "name" : "Suicides - Unknown",
+               "size" : 20
+            }
+         ],
+         "name" : "Apparent Suicides"
+      },
+      {
+         "children" : [
+            {
+               "name" : "Other Deaths - White",
+               "size" : 399
+            },
+            {
+               "name" : "Other Deaths - Asian",
+               "size" : 37
+            },
+            {
+               "name" : "Other Deaths - Black",
+               "size" : 41
+            },
+            {
+               "name" : "Other Deaths - Mixed",
+               "size" : 9
+            },
+            {
+               "name" : "Other Deaths - Other",
+               "size" : 13
+            },
+            {
+               "name" : "Other Deaths - Unknown",
+               "size" : 7
+            }
+         ],
+         "name" : "Other Deaths"
+      }
+   ],
+   "name" : "Deaths Involving Police"
+}
