@@ -1,0 +1,386 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>UK General Election Results</title>
+	<meta charset="utf-8" />
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link rel="stylesheet" href="leaflet/leaflet.css" />
+
+	<style>
+		html, body,#map {
+            height: 100%;
+            width: 100%;
+		}
+
+		.info {
+			padding: 6px 8px;
+			font: 14px/16px Arial, Helvetica, sans-serif;
+			background: white;
+			background: rgba(255,255,255,0.8);
+			box-shadow: 0 0 15px rgba(0,0,0,0.2);
+			border-radius: 5px;
+		}
+		.info h4 {
+			margin: 0 0 5px;
+			color: #777;
+		}
+		.info2 {
+			padding: 6px 8px;
+			font: 14px/16px Arial, Helvetica, sans-serif;
+			background: white;
+			background: rgba(255,255,255,0.8);
+			box-shadow: 0 0 15px rgba(0,0,0,0.2);
+			border-radius: 5px;
+		}
+		.info2 h4 {
+			margin: 0 0 5px;
+			color: #777;
+		}
+
+		.legend {
+			text-align: left;
+			line-height: 18px;
+			color: #555;
+		}
+		.legend i {
+			width: 18px;
+			height: 18px;
+			float: left;
+			margin-right: 8px;
+			opacity: 0.7;
+		}
+	</style>
+</head>
+<body>
+	<div id="map"></div>
+	<script src="leaflet/leaflet.js"></script>
+	<script type="text/javascript" src="BritainData.js"></script>
+	<script type="text/javascript">
+
+	
+	var cities = new L.LayerGroup();
+
+		L.marker([51.507222, -0.1275]).bindPopup('London <br/><b>9,787,426').addTo(cities),
+		L.marker([53.466667, -2.233333]).bindPopup('Manchester <br/><b>2,553,379').addTo(cities),
+		L.marker([53.4, -3]).bindPopup('Liverpool <br/><b>864,122').addTo(cities),
+		L.marker([52.483056, -1.893611]).bindPopup('West Midlands<br/><b>2,440,986').addTo(cities),
+		L.marker([53.799722, -1.549167]).bindPopup('West Yorkshire <br/><b>1,777,934').addTo(cities);	
+		L.marker([53.383611, -1.466944]).bindPopup('Sheffield <br/><b>685,368').addTo(cities),		
+		L.marker([52.633333, -1.133333]).bindPopup('Leicester <br/><b>508,916').addTo(cities),		
+		L.marker([50.827778, -0.152778]).bindPopup('Brighton and Hove <br/><b>474,485').addTo(cities),		
+		L.marker([51.483333,  -3.183333]).bindPopup('Cardiff <br/><b>447,287').addTo(cities);	
+		L.marker([50.72, -1.88]).bindPopup('Bournemouth <br/><b>466,266').addTo(cities),			
+		L.marker([55.858, -4.259]).bindPopup('Glasgow <br/><b>1,209,143').addTo(cities),				
+		L.marker([54.972222, -1.608333]).bindPopup('Tyneside <br/><b>774,891').addTo(cities),			
+		L.marker([52.95,  -1.133333]).bindPopup('Nottingham <br/><b>729,977').addTo(cities),
+		L.marker([51.45,  -2.583333]).bindPopup('Bristol <br/><b>617,280').addTo(cities),	
+		L.marker([54.597,  -5.93]).bindPopup('Belfast <br/><b>672,522').addTo(cities),
+		L.marker([55.953056, -3.188889]).bindPopup('Edinburgh <br/><b>482,005').addTo(cities),				
+		L.marker([54.5767,  -1.2355]).bindPopup('Teesside <br/><b>376,633').addTo(cities),					
+		L.marker([53,  -2.183333]).bindPopup('Stoke-on-Trent <br/><b>372,775').addTo(cities),	
+		L.marker([54.9061,  -1.38113]).bindPopup('Sunderland <br/><b>335,415').addTo(cities);		
+		
+	
+var wealthiest = new L.LayerGroup();
+
+		L.marker([51.505,  -0.2]).bindPopup('Kensington <br/> <b>Avg Wage</b> 153,000').addTo(wealthiest),				
+		L.marker([51.51,  -0.13]).bindPopup('City of Westminster <br/> <b>Avg Wage</b> 130,000').addTo(wealthiest),		
+		L.marker([51.48,  -0.19]).bindPopup('Chelsea & Fulham <br/> <b>Avg Wage</b> 113,000').addTo(wealthiest),		
+		L.marker([51.525, -0.18]).bindPopup('Westminster North <br/> <b>Avg Wage</b> 85,000').addTo(wealthiest),
+		L.marker([51.549, -0.194]).bindPopup('Hampstead and Kilburn <br/> <b>Avg Wage</b> 81,700').addTo(wealthiest),
+		L.marker([51.447,  -0.278]).bindPopup('Richmond Park <br/> <b>Avg Wage</b> 72,300').addTo(wealthiest),
+		L.marker([51.417, -0.218]).bindPopup('Wimbledon <br/> <b>Avg Wage</b> 67,600').addTo(wealthiest),	
+		L.marker([51.463902,  -0.167742]).bindPopup('Battersea <br/> <b>Avg Wage</b> 66,800').addTo(wealthiest),	
+		L.marker([51.35, -0.37]).bindPopup('Esher and Walton <br/> <b>Avg Wage</b> 64,500').addTo(wealthiest);	
+		L.marker([51.535, -0.135]).bindPopup('Holborn and St Pancras <br/> <b>Avg Wage</b> 61,400').addTo(wealthiest);
+
+		
+var poorest = new L.LayerGroup();
+
+		L.marker([53.767, -2.914]).bindPopup('Blackpool South <br/> <b>Avg Wage</b> 20,600').addTo(poorest),
+		L.marker([52.61, -2.11]).bindPopup('Wolverhampton North East <br/> <b>Avg Wage</b> 20,700').addTo(poorest),
+		L.marker([52.61, -2.01]).bindPopup('Walsall North <br/> <b>Avg Wage</b> 20,800').addTo(poorest),
+		L.marker([52.46, -1.82]).bindPopup('Birmingham, Yardley <br/> <b>Avg Wage</b> 20,900').addTo(poorest),
+		L.marker([53.447, -2.967]).bindPopup('Liverpool, Walton <br/> <b>Avg Wage</b> 21,000').addTo(poorest),
+		L.marker([52.5, -1.82]).bindPopup('Birmingham, Hodge Hill <br/> <b>Avg Wage</b> 21,000').addTo(poorest),
+		L.marker([52.56, -2.1]).bindPopup('Wolverhampton South East <br/> <b>Avg Wage</b> 21,000').addTo(poorest),
+		L.marker([53.797240, -1.752577]).bindPopup('Bradford East <br/> <b>Avg Wage</b> 21,200').addTo(poorest),
+		L.marker([53, -1.19]).bindPopup('Nottingham North <br/> <b>Avg Wage</b> 21,200').addTo(poorest),
+		L.marker([53.566, -2.4]).bindPopup('Bolton South East <br/> <b>Avg Wage</b> 21,500').addTo(poorest);
+		
+var unemployement = new L.LayerGroup();
+
+		L.marker([52.49,  -1.87	]).bindPopup('Birmingham Ladywood <br/> <b>Unemployment</b> 9.7%').addTo(unemployement),
+		L.marker([54.595,  -5.964	]).bindPopup('Belfast West <br/> <b>Unemployment</b> 8.9%').addTo(unemployement),
+		L.marker([52.5, -1.82]).bindPopup('Birmingham Hodge Hill <br/> <b>Unemployment</b> 8.5%').addTo(unemployement),
+		L.marker([54.54, -1.139	]).bindPopup('Middlesbrough <br/> <b>Unemployment</b> 8.2%').addTo(unemployement),
+		L.marker([54.663,  -5.965]).bindPopup('Belfast North <br/> <b>Unemployment</b> 7.9%').addTo(unemployement);
+
+
+
+	    var mbAttr = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+				'<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+				'Imagery � <a href="http://mapbox.com">Mapbox</a>',
+			mbUrl = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpandmbXliNDBjZWd2M2x6bDk3c2ZtOTkifQ._QA7i5Mpkd_m30IGElHziw';
+
+	    var grayscale   = L.tileLayer(mbUrl, {id: 'mapbox.light', attribution: mbAttr}),
+		    streets  = L.tileLayer(mbUrl, {id: 'mapbox.streets',   attribution: mbAttr});
+			
+
+		var layer = L.geoJson(tester, {
+		style: style,
+		onEachFeature: onEachFeature
+		})//.addTo(map);
+		
+		var layer2 = L.geoJson(tester, {
+		style: style2,
+		onEachFeature: onEachFeature2
+		})//.addTo(map);
+			
+		
+				var map = L.map('map', {
+			center: [54.033586, -3.493652],
+			zoom: 5,
+			layers: [grayscale, cities, wealthiest,poorest,unemployement]
+			
+		});
+					//Starting Map
+					map.addLayer(layer);
+
+
+
+		L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpandmbXliNDBjZWd2M2x6bDk3c2ZtOTkifQ._QA7i5Mpkd_m30IGElHziw', {
+			maxZoom: 18,
+			attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+				'<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+				'Imagery � <a href="http://mapbox.com">Mapbox</a>',
+			id: 'mapbox.light'
+		}).addTo(map);
+		
+
+		var baseLayers = {
+					"2015": layer,
+					"2010": layer2
+		};
+
+		var overlays = {
+			"Built-up Areas": cities,
+			"Highest Wages": wealthiest,
+			"Lowest Wages": poorest,
+			"Unemployment": unemployement,
+
+		};
+
+		
+	
+		
+
+		// control that shows constituency info on hover
+		var info = L.control();
+		var info2 = L.control();
+
+		info.onAdd = function (map) {
+			this._div = L.DomUtil.create('div', 'info');
+			this.update();
+			return this._div;
+		};
+
+		info.update = function (props) {		
+			this._div.innerHTML = '<h4>UK General Election Results</h4>' +  (props ?
+				'<b>' + props.Name + '</b><br />' + props.ElectionData_Winner15 + ' </sup>'
+				: 'Hover over a constituency');		
+		};
+		//map.removeControl(info); 
+
+
+		// Layer 2 info
+
+
+		info2.onAdd = function (map) {
+			this._div = L.DomUtil.create('div', 'info2');
+			this.update();
+			return this._div;
+		};
+
+		info2.update = function (props) {		
+			this._div.innerHTML = '<h4>UK General Election Results</h4>' +  (props ?
+				'<b>' + props.Name + '</b><br />' + props.ElectionData_Winner10 + ' </sup>'
+				: 'Hover over a constituency');		
+		};
+		
+		map.on('baselayerchange', function (eventLayer) {
+if (eventLayer.name === '2010') { 
+	map.removeControl(info);
+	info2.addTo(map);
+}else if(eventLayer.name === '2015'){
+		map.removeControl(info2);
+		info.addTo(map);
+
+	
+	} })
+
+
+		// get color depending on population density value
+		function getColor(d) {
+			return d == "Labour" ? '#DC241f' :
+			       d == "Conservative"  ? '#0087DC' :
+			       d == "Plaid Cymru"  ? '#008142' :
+			       d == "Liberal Democrat"  ? '#FDBB30' :
+				   d == "Scottish National Party"  ? '#ffff00' :
+			       d == "UKIP"  ? '#70147A' :
+			       d == "Green"  ? '#6AB023' :
+				   d == "DUP"  ? '#D46A4C' :
+			       d == "SDLP"  ? '#99FF66' :
+			       d == "Sinn Fein"  ? '#008800' :
+				   d == "UUP"  ? '#9999FF' :
+				   d == "APNI"  ? '#E6B745' :
+			       d == "Independent"  ? '#FFBAE6' :
+			                  '#D3D3D3';
+		}
+
+		function style(feature) {
+			return {
+				weight: 1,
+				opacity: 1,
+				color: 'white',
+				//dashArray: '3',
+				fillOpacity: 0.7,
+				fillColor: getColor(feature.properties.ElectionData_Winner15)
+			};
+		}
+		
+				function style2(feature) {
+			return {
+				weight: 1,
+				opacity: 1,
+				color: 'white',
+				//dashArray: '3',
+				fillOpacity: 0.7,
+				fillColor: getColor(feature.properties.ElectionData_Winner10)
+			};
+		}
+
+		function highlightFeature(e) {
+			var mylayer = e.target;
+
+			mylayer.setStyle({
+				weight: 2,
+				color: '#666',
+				dashArray: '',
+				fillOpacity: 0.7
+			});
+
+			if (!L.Browser.ie && !L.Browser.opera) {
+				mylayer.bringToFront();
+			}
+
+			info.update(mylayer.feature.properties);
+		}
+		
+			function highlightFeature2(e) {
+			var mylayer2 = e.target;
+
+			mylayer2.setStyle({
+				weight: 2,
+				color: '#666',
+				dashArray: '',
+				fillOpacity: 0.7
+			});
+
+			if (!L.Browser.ie && !L.Browser.opera) {
+				mylayer2.bringToFront();
+			}
+
+			info2.update(mylayer2.feature.properties);
+		}
+		
+		
+
+
+		function resetHighlight(e) {
+			layer.resetStyle(e.target);
+			info.update();
+		}
+		
+			function resetHighlight2(e) {
+			layer2.resetStyle(e.target);
+			info2.update();
+		}
+		
+		
+
+		function zoomToFeature(e) {
+			map.fitBounds(e.target.getBounds());
+		}
+
+		function onEachFeature(feature, layer) {
+			layer.on({
+			
+				mouseover: highlightFeature,
+				mouseout: resetHighlight,
+				click: zoomToFeature
+			});
+		}
+		
+				function onEachFeature2(feature, layer2) {
+			layer2.on({
+				mouseover: highlightFeature2,
+				mouseout: resetHighlight2,
+				click: zoomToFeature
+			});
+		}
+			
+
+
+		map.attributionControl.addAttribution('Vote data &copy; <a href="http://www.electoralcommission.org.uk/our-work/our-research/electoral-data">Electoral Commission</a>');
+
+
+var legend = L.control({position: 'bottomleft'});
+    legend.onAdd = function (map) {
+
+    var div = L.DomUtil.create('div', 'info legend');
+    labels = ['<strong>Parties</strong>'],
+    categories = ['Labour','Conservative','Plaid Cymru','Liberal Democrat',"UKIP","Scottish National Party","Green","DUP","SDLP","Sinn Fein","UUP","APNI","Independent"];
+
+	
+    for (var i = 0; i < categories.length; i++) {
+
+            div.innerHTML += 
+            labels.push(
+                '<i class="circle" style="background:' + getColor(categories[i]) + '"></i> ' +
+            (categories[i] ? categories[i] : '+'));
+
+        }
+        div.innerHTML = labels.join('<br>');
+    return div;
+    };
+    legend.addTo(map);
+		
+				var overlays = {
+			"Built-up Areas": cities,
+			"Highest Wages": wealthiest,
+			"Lowest Wages": poorest,
+			"Unemployed": unemployement,
+		};
+		
+			var baseLayers = {
+			"2015": layer,
+			"2010": layer2
+		};
+
+		L.control.layers(baseLayers, overlays).addTo(map);
+		        map.removeLayer(cities);
+				map.removeLayer(wealthiest);
+				map.removeLayer(poorest),
+				map.removeLayer(unemployement);
+				//map.removeLayer(mylayer)
+		info.addTo(map);
+
+
+
+	</script>
+</body>
+</html>
