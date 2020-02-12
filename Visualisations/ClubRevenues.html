@@ -3,6 +3,8 @@
 
   </head>
   <body style="font-family:'Verdana'">
+	  <div id="header"></div>
+
       <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
  // [START script_body]
@@ -90,11 +92,8 @@
         chart.draw(data, options);
       }
     </script>
-	  <script>
-$("#header").load("../header.html");
-$("#footer").load("../footer.html");
-</script>
- <div id="header"></div>
+
+
 
      <h2>English Football Club Revenues</h2>
 	 Club revenues have rocketed within the last 20 years with more lucrative television rights deals and corporate sponsorships. Since 1992 Man United's revenue has increased a whopping 4658%.
@@ -118,8 +117,11 @@ $("#footer").load("../footer.html");
      <h2>Data Sources</h2>
 	 Individual Club Annual Reports - <a href="http://companieshouse.gov.uk">CompaniesHouse.gov.uk</a>
 
-   
-   <div id="footer"></div>
+<div id="footer"></div>
+<script>
+$("#header").load("../header.html");
+$("#footer").load("../footer.html");
+</script>
   </body>
   
 
