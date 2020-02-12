@@ -1,0 +1,124 @@
+<html>
+  <head>
+
+  </head>
+  <body style="font-family:'Verdana'">
+      <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+ // [START script_body]
+   google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+	  
+	  
+
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+  ['Year','Arsenal','Chelsea','Everton','Liverpool','Man City','Man United','Tottenham'],
+  ['1992',14,0,7,15,9,12,15  ],
+  [1993,15,0,8,18,10,14,15  ],
+  [1994,21,10,9,17,10,21,15  ],
+  [1995,24,13,14,20,9,25,18  ],
+  [1996,21,15,17,27,13,24,23  ],
+  [1997,27,22,19,39,13,40,24  ],
+  [1998,40,37,23,46,15,44,28  ],
+  [1999,49,44,26,45,13,63,39  ],
+  [2000,61,59,28,47,18,66,42  ],
+  [2001,65,51,33,82,32,76,43  ],
+  [2002,91,75,38,99,28,100,59  ],
+  [2003,104,75,47,103,49,120,58  ],
+  [2004,115,118,45,92,62,117,56  ],
+  [2005,115,123,60,121,61,108,67  ],
+  [2006,132,130,58,120,62,106,69  ],
+  [2007,139,165,51,134,57,144,94  ],
+  [2008,183,190,76,159,82,180,103  ],
+  [2009,197,186,80,177,87,197,105  ],
+  [2010,229,187,79,185,125,192,114  ],
+  [2011,197,205,82,184,153,213,149  ],
+  [2012,233,227,81,169,231,187,132  ],
+  [2013,220,229,86,206,271,194,132  ],
+  [2014,303,292,121,256,347,229,165  ],
+  [2015,335,283,126,298,352,183,179  ],
+  [2016,341,299,122,302,392,230,196  ],
+  [2017,408,332,171,364,473,289,275  ],
+  [2018,388.6,423,189,455,501,571,368  ]
+]);
+
+        var options = {
+		hAxis: {
+                  title: 'Year',
+                  textStyle: {
+                     color: '#01579b',
+                     fontSize: 20,
+                     fontName: 'Verdana',
+                     bold: true,
+                     italic: true
+                  },
+                  
+                  titleTextStyle: {
+                     color: '#01579b',
+                     fontSize: 16,
+                     fontName: 'Verdana',
+                     bold: false,
+                     italic: true
+                  }
+               },
+               
+               vAxis: {
+                  title: 'Million GBP',
+                  textStyle: {
+                     color: '#1a237e',
+                     fontSize: 24,
+                     bold: true
+                  },
+                  titleTextStyle: {
+                     color: '#1a237e',
+                     fontSize: 24,
+                     bold: true
+                  }
+               }, 
+		  width: 1100,
+  height: 600,
+          title: 'Football Club Revenues 1992-2018',
+          legend: { position: 'right' },
+		               //colors: ['#FF0000', '#0033FF', '#63C6C6', '#7F0000', '#ff0000', '#ff0000', '#ff0000']
+  
+		  
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+        chart.draw(data, options);
+      }
+    </script>
+ 
+
+     <h2>English Football Club Revenues</h2>
+	 Club revenues have rocketed within the last 20 years with more lucrative television rights deals and corporate sponsorships. Since 1992 Man United's revenue has increased a whopping 4658%.
+	 
+	 
+	 <h3>Keypoints</h3>
+	 <ul>
+  <li><b>2012</b> - Man United was listed on the New York Stock Exchnage</li>
+  <li><b>2008</b> - Man City is bought by Sheikh Mansour Bin Zayed Al Nahyan</li>
+  <li><b>2010</b> - Liverpool is bought by Fenway Sports Group</li>
+</ul>  
+	 
+   <div id="curve_chart" style="width: 900px; height: 500px"></div>
+   
+   <br>
+   <br>
+   <br>
+   <br>
+   <br>
+   <br>   
+     <h2>Data Sources</h2>
+	 Individual Club Annual Reports - <a href="http://companieshouse.gov.uk">CompaniesHouse.gov.uk</a>
+
+   
+   
+  </body>
+  
+
+  
+  
+</html>
