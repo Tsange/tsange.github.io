@@ -1,0 +1,224 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	
+	<title>Eastenders - Walford Death Map</title>
+
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<link rel="shortcut icon" type="image/x-icon" href="docs/images/favicon.ico" />
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
+
+
+	<style>
+		html, body {
+			height: 100%;
+			margin: 0;
+			font-family: Arial;
+		}
+		#map {
+			width: 900px;
+			height: 500px;
+		}
+	</style>
+
+	
+</head>
+<body>
+<h1>Eastenders - Walford Death Map</h1>
+Eastenders is a long running British soap drama in the U.K with millions of viewers tuning in weekly to watch. As the show is notorious for killing of characters
+in dramatic storyline, for a bit I made a map of everywhere a character has died on the set.
+
+<br/>
+<br/>
+<div id='map' ></div>
+
+<h2>Creation</h2>
+To create the Walford Death Map I used Javascript-based library Leaflet to control the map's main functions such as zooming, adding pins etc.
+<br/>
+<br/>
+The actual map element was created in Inkscape using various set photos and layout plans for reference. Although I've tried to be as accurate as possible some features may be missing.
+
+<h2>Data Source</h2>
+<ul>
+<li><a href="https://eastenders.fandom.com/wiki/EastEndersWiki">Eastenders.fandom.com</a></li>
+<li>Eastenders 2009 Annual</li>
+
+</ul>
+
+<script>
+
+
+	var map = L.map('map', {
+		crs: L.CRS.Simple,
+		minZoom: -1
+		
+	});
+	
+	var IconAccidental = new L.Icon({
+  iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-yellow.png',
+  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowSize: [41, 41]
+});
+
+	var IconHomicide = new L.Icon({
+  iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowSize: [41, 41]
+});
+
+	var IconNatural = new L.Icon({
+  iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
+  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowSize: [41, 41]
+});
+
+	var IconSuicide= new L.Icon({
+  iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png',
+  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowSize: [41, 41]
+});
+
+	var IconUndetermined = new L.Icon({
+  iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-black.png',
+  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowSize: [41, 41]
+});
+
+
+
+	var bounds = [[0,0], [800,1000]];
+	var image = L.imageOverlay('walford 2020.png', bounds).addTo(map);
+
+	
+        var Layer_Accidental = new L.LayerGroup();
+        var Layer_Homicide = new L.LayerGroup();
+        var Layer_Natural = new L.LayerGroup();
+        var Layer_Suicide = new L.LayerGroup();
+        var Layer_Undetermined = new L.LayerGroup();
+
+		//18-20 ALbert Square
+		L.marker([100,310 ],{icon: IconAccidental}).bindPopup(' <b>Name:</b>Audrey Trueman<br/> <b>Location:</b> 18-20 Albert Square<br/> <b>Date:</b> 7th September 2001<br/> <b>Note:</b> Intracerebral hemorrhage from being struck by falling debris<iframe width="300" src="https://www.youtube.com/embed/LjpvMzy29cc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>').addTo(Layer_Accidental);
+		L.marker([100,340 ],{icon: IconAccidental}).bindPopup(' <b>Name:</b>Yusef Khan<br/> <b>Location:</b> 18-20 Albert Square<br/> <b>Date:</b> 26th December 2011<br/> <b>Note:</b> Building collapse during a house fire<iframe width="300" src="https://www.youtube.com/embed/9NU5_0HbFg0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>').addTo(Layer_Accidental);
+
+		//23 Albert Square
+		L.marker([450,170 ],{icon: IconHomicide}).bindPopup(' <b>Name:</b>Reg Cox<br/> <b>Location:</b> 23 Albert Square<br/> <b>Date:</b> 19th Feb 1985<br/> <b>Note:</b> Beaten to death by Nick Cotton <iframe width="300" src="https://www.youtube.com/embed/4fxAgEnf05I" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>').addTo(Layer_Homicide);
+		L.marker([450,180 ],{icon: IconNatural}).bindPopup(' <b>Name:</b>Hassan Osman<br/> <b>Location:</b> 23 Albert Square<br/> <b>Date:</b> 20th June 1985<br/> <b>Note:</b> Sudden infant death syndrome<iframe width="300" src="https://www.youtube.com/embed/wJxxjrp_Wmc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>').addTo(Layer_Natural);
+		L.marker([450,190 ],{icon: IconHomicide}).bindPopup(' <b>Name:</b>Nick Cotton<br/> <b>Location:</b> 23 Albert Square<br/> <b>Date:</b> 13th February 2015<br/> <b>Note:</b> Respiratory failure following an impure heroin overdose<iframe width="300" src="https://www.youtube.com/embed/MgPUcZbYwSw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>').addTo(Layer_Homicide);
+		L.marker([450,200 ],{icon: IconNatural}).bindPopup(' <b>Name:</b>Joyce Murray<br/> <b>Location:</b> 23A Albert Square<br/> <b>Date:</b> 43188<br/> <b>Note:</b> Passed away in sleep<iframe width="300" src="https://www.youtube.com/embed/O7zWRf_n-bc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>').addTo(Layer_Natural);
+		L.marker([450,210 ],{icon: IconSuicide}).bindPopup(' <b>Name:</b>Dinah Wilson<br/> <b>Location:</b> 23B Albert Square<br/> <b>Date:</b> 43601<br/> <b>Note:</b> Overdose<iframe width="300" src="https://www.youtube.com/embed/98ALJjsPbEY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>').addTo(Layer_Suicide);
+		//25 Albert Square
+		L.marker([400,180 ],{icon: IconSuicide}).bindPopup(' <b>Name:</b>Donna Ludlow<br/> <b>Location:</b> 25 Albert Square<br/> <b>Date:</b> 13th April 1989<br/> <b>Note:</b> Choked on her own vomit following a suicidal heroin overdose<iframe width="300" src="https://www.youtube.com/embed/Dbj4VIrLCy8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>').addTo(Layer_Suicide);
+		L.marker([400,190 ],{icon: IconNatural}).bindPopup(' <b>Name:</b>Harold Legg<br/> <b>Location:</b> 25 Albert Square<br/> <b>Date:</b> 15th February 2019<br/> <b>Note:</b> Pancreatic cancer<iframe width="300" src="https://www.youtube.com/embed/huczANfP7w4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>').addTo(Layer_Natural);
+		L.marker([400,200 ],{icon: IconAccidental}).bindPopup(' <b>Name:</b>Leo King<br/> <b>Location:</b> 25 Albert Square<br/> <b>Date:</b> 14th February 2020<br/> <b>Note:</b> Stabbed in self-defence by Whitney Dean<iframe width="300" src="https://www.youtube.com/embed/RjxZiRG8wiY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>').addTo(Layer_Accidental);
+		//27 Albert Square
+		L.marker([350,190 ],{icon: IconSuicide}).bindPopup(' <b>Name:</b>May Wright<br/> <b>Location:</b> 27 Albert Square<br/> <b>Date:</b> 18th June 2008<br/> <b>Note:</b> Suicide by gas explosion<iframe width="300" src="https://www.youtube.com/embed/P5jsKit5GZ0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>').addTo(Layer_Suicide);
+		L.marker([350,200 ],{icon: IconHomicide}).bindPopup(' <b>Name:</b>Michael Moon<br/> <b>Location:</b> 27 Albert Square<br/> <b>Date:</b> 31st October 2013<br/> <b>Note:</b> Stabbed by Janine Butcher & Alice Branning<iframe width="300" src="https://www.youtube.com/embed/u4obtmJEMQU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>').addTo(Layer_Homicide);
+		//31 Albert Square
+		L.marker([230,160 ],{icon: IconHomicide}).bindPopup(' <b>Name:</b>Tom Banks<br/> <b>Location:</b> 31 Albert Square<br/> <b>Date:</b> 1st November 2002<br/> <b>Note:</b> Blast injury from an explosion during a house fire, started by Trevor Morgan<iframe width="300" src="https://www.youtube.com/embed/akMRVlQZ5AU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>').addTo(Layer_Homicide);
+		L.marker([230,170 ],{icon: IconHomicide}).bindPopup(' <b>Name:</b>Trevor Morgan<br/> <b>Location:</b> 31 Albert Square<br/> <b>Date:</b> 1st November 2002<br/> <b>Note:</b> Blast injury from an explosion during a house fire, started by himself<iframe width="300" src="https://www.youtube.com/embed/akMRVlQZ5AU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>').addTo(Layer_Homicide);
+		L.marker([230,180 ],{icon: IconNatural}).bindPopup(' <b>Name:</b>Evie Brown<br/> <b>Location:</b> 31 Albert Square<br/> <b>Date:</b> 8th December 2006<br/> <b>Note:</b> Breast cancer<iframe width="300" src="" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>').addTo(Layer_Natural);
+		L.marker([230,190 ],{icon: IconNatural}).bindPopup(' <b>Name:</b>Pat Evans<br/> <b>Location:</b> 31 Albert Square<br/> <b>Date:</b> 1st January 2012<br/> <b>Note:</b> Pancreatic cancer<iframe width="300" src="https://www.youtube.com/embed/gkmeGHM5CH0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>').addTo(Layer_Natural);
+		L.marker([230,200 ],{icon: IconNatural}).bindPopup(' <b>Name:</b>Charlie Slater<br/> <b>Location:</b> 31 Albert Square<br/> <b>Date:</b> 6th January 2016<br/> <b>Note:</b> Heart attack<iframe width="300" src="https://www.youtube.com/embed/WORmK_F3KU4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>').addTo(Layer_Natural);
+		L.marker([230,210 ],{icon: IconAccidental}).bindPopup(' <b>Name:</b>Billie Jackson<br/> <b>Location:</b> 31 Albert Square<br/> <b>Date:</b> 40465<br/> <b>Note:</b> Choked on his own vomit from beer<iframe width="300" src="https://www.youtube.com/embed/XrfKRgiHiao" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>').addTo(Layer_Accidental);
+		//4 Turpin Road
+		L.marker([300,600 ],{icon: IconHomicide}).bindPopup(' <b>Name:</b>Saskia Duncan<br/> <b>Location:</b> 4 Turpin Road<br/> <b>Date:</b> 14th February 1999<br/> <b>Note:</b> Bludgeoned with an ashtray by Steve Owen<iframe width="300" src="https://www.youtube.com/embed/J-1ybfripVk" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>').addTo(Layer_Homicide);
+		//41 ALbert Square
+		L.marker([200,420 ],{icon: IconNatural}).bindPopup(' <b>Name:</b>Roy Evans<br/> <b>Location:</b> 41 Albert Square<br/> <b>Date:</b> 17th March 2003<br/> <b>Note:</b> Heart attack<iframe width="300" src="https://www.youtube.com/embed/8WF1J_nueJ0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>').addTo(Layer_Natural);
+		L.marker([200,450 ],{icon: IconNatural}).bindPopup(' <b>Name:</b>Nana Moon<br/> <b>Location:</b> 41 Albert Square<br/> <b>Date:</b> 16th December 2005<br/> <b>Note:</b> Aortic aneurysm<iframe width="300" src="https://www.youtube.com/embed/MpkYVb3gOjY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>').addTo(Layer_Natural);
+		//43 Albert Square
+		L.marker([250,450 ],{icon: IconNatural}).bindPopup(' <b>Name:</b>Lydia Simmonds<br/> <b>Location:</b> 43 Albert Square<br/> <b>Date:</b> 13th June 2011<br/> <b>Note:</b> Natural causes<iframe width="300" src="https://www.youtube.com/embed/Qw-dNhbgv38" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>').addTo(Layer_Natural);
+		//45 Albert Square
+		L.marker([300,430 ],{icon: IconSuicide}).bindPopup(' <b>Name:</b>Ethel Skinner<br/> <b>Location:</b> 45 Albert Square<br/> <b>Date:</b> 7th September 2000<br/> <b>Note:</b> Suicide by drug overdose assisted by Dot Cotton<iframe width="300" src="https://www.youtube.com/embed/KpS6Z9z4T38" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>').addTo(Layer_Suicide);
+		L.marker([300,445 ],{icon: IconAccidental}).bindPopup(' <b>Name:</b>Joe Macer<br/> <b>Location:</b> 45 Albert Square<br/> <b>Date:</b> 26th January 2007<br/> <b>Note:</b> Fell from a window<iframe width="300" src="https://www.youtube.com/embed/B5b4x_R6vXY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>').addTo(Layer_Accidental);
+		L.marker([300,455 ],{icon: IconNatural}).bindPopup(' <b>Name:</b>Lou Beale<br/> <b>Location:</b> 45 Albert Square<br/> <b>Date:</b> 32350<br/> <b>Note:</b> Passed away in sleep<iframe width="300" src="https://www.youtube.com/embed/lTO0S5OI4J4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>').addTo(Layer_Natural);
+		//55 Albert Square
+		L.marker([100,200 ],{icon: IconSuicide}).bindPopup(' <b>Name:</b>Peggy Mitchell<br/> <b>Location:</b> 55 Victoria Road<br/> <b>Date:</b> 17th May 2016<br/> <b>Note:</b> Suicide by drug overdose<iframe width="300" src="https://www.youtube.com/embed/jJANeow6ytA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>').addTo(Layer_Suicide);
+
+		//6 Albert Square
+		L.marker([600,200 ],{icon: IconAccidental}).bindPopup(' <b>Name:</b>Alan Hall<br/> <b>Location:</b> 6 Albert Square<br/> <b>Date:</b> 8th March 1994<br/> <b>Note:</b> Blast injuries from a fire started by Phil Mitchell<iframe width="300" src="https://www.youtube.com/embed/hItVCoMdK40" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>').addTo(Layer_Accidental);
+		//89 Albert Square
+		L.marker([700,870 ],{icon: IconAccidental}).bindPopup(' <b>Name:</b>Laura Beale<br/> <b>Location:</b> 89 Albert Square<br/> <b>Date:</b> 30th April 2004<br/> <b>Note:</b> Cervical fracture after falling down a flight of stairs<iframe width="300" src="https://www.youtube.com/embed/55XQlYXi_20" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>').addTo(Layer_Accidental);
+		L.marker([700,860 ],{icon: IconHomicide}).bindPopup(' <b>Name:</b>Jase Dyer<br/> <b>Location:</b> 89 Albert Square<br/> <b>Date:</b> 28th August 2008<br/> <b>Note:</b> Stabbed by Terry Bates<iframe width="300" src="https://www.youtube.com/embed/bQEZG-VGgAs" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>').addTo(Layer_Homicide);
+		L.marker([700,850 ],{icon: IconHomicide}).bindPopup(' <b>Name:</b>Heather Trott<br/> <b>Location:</b> 89A George Street<br/> <b>Date:</b> 21st March 2012<br/> <b>Note:</b> Bludgeoned with a picture frame by Ben Mitchell<iframe width="300" src="https://www.youtube.com/embed/OYXLRIsvR9o" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>').addTo(Layer_Homicide);
+		//Albert Square Gardens
+		L.marker([380,400 ],{icon: IconHomicide}).bindPopup(' <b>Name:</b>Dennis Rickman<br/> <b>Location:</b> Albert Square<br/> <b>Date:</b> 30th December 2005<br/> <b>Note:</b> Stabbed by Danny Moon on orders from Johnny Allen<iframe width="300" src="https://www.youtube.com/embed/kOt_5Xun-9M" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>').addTo(Layer_Homicide);
+		L.marker([300,320 ],{icon: IconHomicide}).bindPopup(' <b>Name:</b>Pauline Fowler<br/> <b>Location:</b> Albert Square Gardens<br/> <b>Date:</b> 25th December 2006<br/> <b>Note:</b> Intracerebral hemorrhage after being bludgeoned with a frying pan by Joe Macer<iframe width="300" src="https://www.youtube.com/embed/QqKMaqzSPuA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>').addTo(Layer_Homicide);
+		L.marker([460,320 ],{icon: IconNatural}).bindPopup(' <b>Name:</b>Derek Branning<br/> <b>Location:</b> Albert Square Gardens<br/> <b>Date:</b> 25th December 2012<br/> <b>Note:</b> Heart attack<iframe width="300" src="https://www.youtube.com/embed/u4i4UUtf3eQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>').addTo(Layer_Natural);
+		L.marker([400,300 ],{icon: IconNatural}).bindPopup(' <b>Name:</b>Harry Osborne<br/> <b>Location:</b> Albert Square Gardens<br/> <b>Date:</b> 20th February 1990<br/> <b>Note:</b> Natural causes<iframe width="300" src="" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>').addTo(Layer_Natural);
+		L.marker([300,330 ],{icon: IconHomicide}).bindPopup(' <b>Name:</b>Shakil Kazemi<br/> <b>Location:</b> Albert Square Gardens<br/> <b>Date:</b> 25th May 2018<br/> <b>Note:</b> Stabbed during a gang attack<iframe width="300" src="https://www.youtube.com/embed/GW6BfRmlNi8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>').addTo(Layer_Homicide);
+		L.marker([290,315 ],{icon: IconNatural}).bindPopup(' <b>Name:</b>Daniel Cook<br/> <b>Location:</b> Albert Square Gardens<br/> <b>Date:</b> 27th February 2020<br/> <b>Note:</b> Terminal cancer<iframe width="300" src="https://www.youtube.com/embed/vh1LTG7i1nU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>').addTo(Layer_Natural);
+		L.marker([400,340 ],{icon: IconHomicide}).bindPopup(' <b>Name:</b>Eddie Royle<br/> <b>Location:</b> Albert Square Gardens<br/> <b>Date:</b> 33493<br/> <b>Note:</b> Stabbed by Nick Cotton<iframe width="300" src="https://www.youtube.com/embed/Hl8r0LYLvNw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>').addTo(Layer_Homicide);
+		L.marker([340,320 ],{icon: IconHomicide}).bindPopup(' <b>Name:</b>Hunter Owen<br/> <b>Location:</b> Albert Square Gardens<br/> <b>Date:</b> 6th September 2019<br/> <b>Note:</b> Shot by armed police<iframe width="300" src="https://www.youtube.com/embed/69RdKBjnbBI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>').addTo(Layer_Homicide);	
+		//Allotments
+		L.marker([100,800 ],{icon: IconHomicide}).bindPopup(' <b>Name:</b>Arthur Fowler<br/> <b>Location:</b> Allotment<br/> <b>Date:</b> 20th May 1996<br/> <b>Note:</b> Intracerebral hemorrhage after being bludgeoned with a lead pipe<iframe width="300" src="https://www.youtube.com/embed/rgSMgc74rEM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>').addTo(Layer_Homicide);
+		L.marker([100,850 ],{icon: IconHomicide}).bindPopup(' <b>Name:</b>Trina Johnson<br/> <b>Location:</b> Allotments<br/> <b>Date:</b> 3rd September 2009<br/> <b>Note:</b> Exsanguination after being impaled on a rake by Lucas Johnson<iframe width="300" src="https://www.youtube.com/embed/eyQ4h5dt3U0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>').addTo(Layer_Homicide);
+		//Bridge Street
+		L.marker([370,600 ],{icon: IconAccidental}).bindPopup(' <b>Name:</b>Ashley Cotton<br/> <b>Location:</b> Bridge Street<br/> <b>Date:</b> 14th June 2001<br/> <b>Note:</b> Crashed on a motorbike sabotaged by Nick Cotton<iframe width="300" src="https://www.youtube.com/embed/ZH3ZI-OrjjM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>').addTo(Layer_Accidental);
+		L.marker([340,600 ],{icon: IconAccidental}).bindPopup(' <b>Name:</b>Emma Summerhayes<br/> <b>Location:</b> Bridge Street<br/> <b>Date:</b> 1st January 2015<br/> <b>Note:</b> Intracerebral hemorrhage after being struck by a car sabotaged by Nick Cotton and driven by Roxy Mitchell<iframe width="300" src="https://www.youtube.com/embed/Cred168-8Fo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>').addTo(Layer_Accidental);
+		//George Street
+		L.marker([650,420 ],{icon: IconAccidental}).bindPopup(' <b>Name:</b>Jamie Mitchell<br/> <b>Location:</b> George Street<br/> <b>Date:</b> 25th December 2002<br/> <b>Note:</b> Ruptured spleen after being struck by a car driven by Martin Fowler<iframe width="300" src="https://www.youtube.com/embed/zeif5SjkH9c" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>').addTo(Layer_Accidental);
+		L.marker([650,670 ],{icon: IconAccidental}).bindPopup(' <b>Name:</b>Danielle Jones<br/> <b>Location:</b> George Street<br/> <b>Date:</b> 2nd April 2009<br/> <b>Note:</b> Struck by a car driven by Janine Butcher<iframe width="300" src="https://www.youtube.com/embed/ifXiI--Owy0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>').addTo(Layer_Accidental);
+		//Queen Vic
+		L.marker([370,420 ],{icon: IconAccidental}).bindPopup(' <b>Name:</b>Tiffany Mitchell<br/> <b>Location:</b> Outside Queen Vic<br/> <b>Date:</b> 31st December 1998<br/> <b>Note:</b> Skull fracture after being struck by a car driven by Frank Butcher<iframe width="300" src="https://www.youtube.com/embed/m19Zer-UPpE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>').addTo(Layer_Accidental);
+		L.marker([420,450 ],{icon: IconNatural}).bindPopup(' <b>Name:</b>Tom Clements<br/> <b>Location:</b> Queen Vic<br/> <b>Date:</b> 21st April 1988<br/> <b>Note:</b> Heart attack in toilets<iframe width="300" src="https://www.youtube.com/embed/kWX-c1yiX3c" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>').addTo(Layer_Natural);
+		L.marker([420,470 ],{icon: IconHomicide}).bindPopup(' <b>Name:</b>Den Watts<br/> <b>Location:</b> Queen Vic<br/> <b>Date:</b> 18th February 2005<br/> <b>Note:</b> Bludgeoned with a doorstop by Chrissie Watts<iframe width="300" src="https://www.youtube.com/embed/lSLj9j7oJNk" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>').addTo(Layer_Homicide);
+		L.marker([420,490 ],{icon: IconHomicide}).bindPopup(' <b>Name:</b>Archie Mitchell<br/> <b>Location:</b> Queen Vic<br/> <b>Date:</b> 25th December 2009<br/> <b>Note:</b> Bludgeoned with a bust by Stacey Slater<iframe width="300" src="https://www.youtube.com/embed/qQnhitQe78g" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>').addTo(Layer_Homicide);
+		L.marker([400,400 ],{icon: IconAccidental}).bindPopup(' <b>Name:</b>Bradley Branning<br/> <b>Location:</b> Queen Vic<br/> <b>Date:</b> 19th February 2010<br/> <b>Note:</b> Fell from a roof<iframe width="300" src="https://www.youtube.com/embed/IJ347RFcDlw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>').addTo(Layer_Accidental);
+		L.marker([420,400 ],{icon: IconAccidental}).bindPopup(' <b>Name:</b>Abi Branning<br/> <b>Location:</b> Queen Vic<br/> <b>Date:</b> 19th January 2018<br/> <b>Note:</b> Life support withdrawn following brainstem death after falling from a roof<iframe width="300" src="https://www.youtube.com/embed/JFnixSYfhww" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>').addTo(Layer_Accidental);
+		L.marker([420,460 ],{icon: IconAccidental}).bindPopup(' <b>Name:</b>Sylvie Carter<br/> <b>Location:</b> Queen Vic<br/> <b>Date:</b> 42824<br/> <b>Note:</b> Electrocuted in bathtub with CD player<iframe width="300" src="https://www.youtube.com/embed/EjPl3OjtMvQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>').addTo(Layer_Accidental);
+		//Arches
+		L.marker([580,610 ],{icon: IconHomicide}).bindPopup(' <b>Name:</b>Carl White<br/> <b>Location:</b> The Arches<br/> <b>Date:</b> 1st January 2014<br/> <b>Note:</b> Bludgeoned with a car boot lid by Ronnie Mitchell<iframe width="300" src="https://www.youtube.com/embed/a3tC3oVauhQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>').addTo(Layer_Homicide);
+
+		
+//Lat, Long
+//Lat, Long
+
+
+	//L.marker([450, 200 ]).bindPopup('Reg Cox <br/> <b>Location: </b> 23 Albert Square').addTo(map);
+	
+	map.setView( [450, 500], -1);
+	
+	
+	
+	var overlays = {
+			"Accidental": Layer_Accidental,
+			"Homicide": Layer_Homicide,
+			"Natural": Layer_Natural,
+			"Suicide": Layer_Suicide,
+			"Undetermined": Layer_Undetermined
+		};
+
+
+			L.control.layers(0,overlays).addTo(map);
+
+			map.addLayer(Layer_Accidental)
+			map.addLayer(Layer_Homicide)
+			map.addLayer(Layer_Natural)
+			map.addLayer(Layer_Suicide)
+			map.addLayer(Layer_Undetermined)
+</script>
+
+
+
+</body>
+</html>
